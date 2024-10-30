@@ -1,9 +1,7 @@
-{application, exml,
- [
-  {description, "XML parsing library"},
-  {vsn, git},
-  {registered, []},
-  {applications, [kernel,
-                  stdlib]},
-  {env, []}
- ]}.
+{application,exml,
+             [{description,"XML parsing library"},
+              {vsn,"git"},
+              {registered,[]},
+              {applications,[kernel,stdlib]},
+              {env,[]},
+              {modules,[]}]}.

@@ -1,18 +1,24 @@
-.PHONY: rel deps test
+IGNORE_DEPS += edown eper eunit_formatters meck node_package rebar_lock_deps_plugin rebar_vsn_plugin reltool_util
+C_SRC_DIR = /path/do/not/exist
+C_SRC_TYPE = rebar
+DRV_CFLAGS = -fPIC
+export DRV_CFLAGS
+ERLANG_ARCH = 64
+export ERLANG_ARCH
+ERLC_OPTS = +debug_info
+export ERLC_OPTS
 
-all: deps compile
 
-compile: rebar
-	./rebar compile
 
-deps: rebar
-	./rebar get-deps
+rebar_dep: preprocess pre-deps deps pre-app app
 
-clean: rebar
-	./rebar clean
+preprocess::
 
-test: compile
-	./rebar skip_deps=true eunit
+pre-deps::
 
-rebar:
-	wget http://cloud.github.com/downloads/basho/rebar/rebar && chmod u+x rebar
+pre-app::
+
+pre-app::
+	$(MAKE) -f c_src/Makefile.erlang.mk
+
+include $(if $(ERLANG_MK_FILENAME),$(ERLANG_MK_FILENAME),erlang.mk)
